@@ -56,7 +56,7 @@ console.log(shopIndex);
         res.json("");
 })
 
-shopRoutes.get("/:id", function (req, res) {
+shopRoutes.get("/shop-details/:id", function (req, res) {
     // search array for id
     for (let i=0; i<shops.length; i++){
     if (parseInt(req.params.id) === shops[i].id) {
@@ -67,5 +67,21 @@ shopRoutes.get("/:id", function (req, res) {
     res.status(404);
     res.send({"error": "Shop not found"});
 });
+
+shopRoutes.get("/add-shop", (req, res) => {
+    res.render("add-shop");
+})
+
+shopRoutes.post("/added-shop", (req, res) => {
+
+    let newShop: Shop = {name: req.body.newname, rating: parseFloat(req.body.newrating)}
+
+    newShop.id = nextId;
+    nextId += 111;
+    shops.push(newShop);
+
+    res.render("added-shop", {newShop});
+});
+
 
 export default shopRoutes;

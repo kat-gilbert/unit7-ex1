@@ -1,6 +1,6 @@
 
 interface Shop {
-    id: number;
+    id?: number;
     name: string;
     rating: number;
 }
